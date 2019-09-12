@@ -1,13 +1,16 @@
 // Define "gameState" here
 const gameState = {};
+var score1 = 0;
+var score2 = 0;
 
 function create() {
     gameState.line = this.add.rectangle(450, 300, 10, 600,  0x0066cc);
     gameState.player1 = this.add.rectangle(10, 0, 20, 50, 0xff0066);
     gameState.ball = this.add.rectangle(450, 300, 20, 20, 0xff0066);
-    
+    gameState.score1 = this.add.text(20, 20, score1, {fill: 'blue', fontSize:40, fontStyle:'bold'});
+    gameState.score2 = this.add.text(870, 20, score2, {fill: 'blue', fontSize:40, fontStyle:'bold'});
     gameState.ball.vx = 2;
-    gameState.ball.vy = Math.random()*.5;
+    gameState.ball.vy = Math.random()*.4;
     gameState.cursors = this.input.keyboard.createCursorKeys();
     console.log(gameState.player1)
 }
