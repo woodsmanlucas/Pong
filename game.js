@@ -5,7 +5,7 @@ var score2 = 0;
 
 function create() {
     gameState.line = this.add.rectangle(450, 300, 10, 600,  0x0066cc);
-    gameState.player1 = this.add.rectangle(10, 0, 20, 50, 0xff0066);
+    gameState.player1 = this.add.rectangle(10, 300, 20, 50, 0xff0066);
     gameState.ball = this.add.rectangle(450, 300, 20, 20, 0xff0066);
     gameState.score1 = this.add.text(20, 20, score1, {fill: 'blue', fontSize:40, fontStyle:'bold'});
     gameState.score2 = this.add.text(870, 20, score2, {fill: 'blue', fontSize:40, fontStyle:'bold'});
@@ -32,7 +32,25 @@ function update() {
     gameState.ball.vy += gameState.player1.vy;
   }
   gameState.ball.x += gameState.ball.vx;
-  gameState.ball.y += gameState.ball.vy;
+    gameState.ball.y += gameState.ball.vy;
+
+    if (gameState.ball.y < 0 && gameState.ball.x < (config.width/2)) {
+	score2++;
+	gameState.score2.setText(score2);
+        reset();
+    }
+
+    if (gameState.ball.y > 600 && gameState.ball.x < (config.width/2)) {
+	score2++;
+	gameState.score2.setText(score2);
+	reset();
+    }
+
+    if (gameState.ball.x < 0) {
+	score2++
+	gameState.score2.setText(score2);
+	reset();
+    }
 }
 
 function contactsPaddle() {
@@ -42,6 +60,12 @@ function contactsPaddle() {
     gameState.ball.y >= gameState.player1.y -25
 }
 
+function reset(){
+    gameState.ball.x = 450;
+    gameState.ball.y = 300;
+    gameState.ball.vx = 2;
+    gameState.ball.vy = Math.random()*.4;
+}
 
 const config = {
 	type: Phaser.AUTO,
