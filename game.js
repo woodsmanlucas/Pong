@@ -12,7 +12,7 @@ function create() {
     gameState.ball.vx = 2;
     gameState.ball.vy = Math.random()*.4;
     gameState.cursors = this.input.keyboard.createCursorKeys();
-    console.log(gameState.player1)
+    // console.log(gameState.player1)
 }
 
 function update() {
@@ -34,6 +34,8 @@ function update() {
   gameState.ball.x += gameState.ball.vx;
     gameState.ball.y += gameState.ball.vy;
 
+    // Scoreing
+
     if (gameState.ball.y < 0 && gameState.ball.x < (config.width/2)) {
 	score2++;
 	gameState.score2.setText(score2);
@@ -51,6 +53,19 @@ function update() {
 	gameState.score2.setText(score2);
 	reset();
     }
+
+    if (gameState.ball.y < 0 && gameState.ball.x > (config.width/2)) {
+        score1++;
+        gameState.score1.setText(score1);
+        reset();
+    }
+
+    if (gameState.ball.y > 600 && gameState.ball.x > (config.width/2)) {
+        score1++;
+        gameState.score1.setText(score1);
+        reset();
+    }
+
 }
 
 function contactsPaddle() {
@@ -65,6 +80,15 @@ function reset(){
     gameState.ball.y = 300;
     gameState.ball.vx = 2;
     gameState.ball.vy = Math.random()*.4;
+    if (score1 >= 9) {
+        console.log("Player 1 wins");
+        document.getElementById("Win").innerHTML = "Player 1 Wins! Game Over"
+    }
+    if (score2 >= 9) {
+        console.log("The wall wins");
+        document.getElementById("Win").innerHTML = "The Wall Wins! Game Over"
+        game.destroy();
+    }
 }
 
 const config = {
