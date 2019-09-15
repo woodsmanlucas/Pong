@@ -25,15 +25,16 @@ function update() {
     gameState.player1.y -= 1;
     gameState.player1.vy = -.5;
     }
-  if (gameState.ball.x >= config.width) {
+  if (gameState.ball.x >= config.width - 25) {
       gameState.ball.vx *= -1;
   }
   if (contactsPaddle()) {
     gameState.ball.vx *= -1;
     gameState.ball.vy += gameState.player1.vy;
-  }
-  gameState.ball.x += gameState.ball.vx;
+ }
+    gameState.ball.x += gameState.ball.vx;
     gameState.ball.y += gameState.ball.vy;
+    gameState.player2.y = gameState.ball.y;
 
     // Scoreing
 
@@ -88,7 +89,7 @@ function reset(){
     }
     if (score2 >= 9) {
         console.log("The wall wins");
-        document.getElementById("Win").innerHTML = "The Wall Wins! Game Over"
+        document.getElementById("Win").innerHTML = "Player 2 Wins! Game Over"
         game.destroy();
     }
 }
