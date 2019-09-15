@@ -6,11 +6,12 @@ var score2 = 0;
 function create() {
     gameState.line = this.add.rectangle(450, 300, 10, 600,  0x0066cc);
     gameState.player1 = this.add.rectangle(10, 300, 20, 50, 0xff0066);
+    gameState.player2 = this.add.rectangle(890, 300, 20, 50, 0xff0066);
     gameState.ball = this.add.rectangle(450, 300, 20, 20, 0xff0066);
     gameState.score1 = this.add.text(20, 20, score1, {fill: 'blue', fontSize:40, fontStyle:'bold'});
     gameState.score2 = this.add.text(870, 20, score2, {fill: 'blue', fontSize:40, fontStyle:'bold'});
-    gameState.ball.vx = 2;
-    gameState.ball.vy = Math.random()*.4;
+    gameState.ball.vx = Math.random()*4 - 2;
+    gameState.ball.vy = (Math.random()*.8) - .4;
     gameState.cursors = this.input.keyboard.createCursorKeys();
     // console.log(gameState.player1)
 }
@@ -83,6 +84,7 @@ function reset(){
     if (score1 >= 9) {
         console.log("Player 1 wins");
         document.getElementById("Win").innerHTML = "Player 1 Wins! Game Over"
+        game.destroy();
     }
     if (score2 >= 9) {
         console.log("The wall wins");
