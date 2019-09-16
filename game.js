@@ -17,11 +17,11 @@ function create() {
 }
 
 function update() {
-  if (gameState.cursors.down.isDown){
+  if (gameState.cursors.down.isDown  && gameState.ball.x < (config.width/2)){
      gameState.player1.y  += 1;
      gameState.player1.vy = .5;
  }
-  if (gameState.cursors.up.isDown){
+  if (gameState.cursors.up.isDown && gameState.ball.x < (config.width/2)){
     gameState.player1.y -= 1;
     gameState.player1.vy = -.5;
     }
